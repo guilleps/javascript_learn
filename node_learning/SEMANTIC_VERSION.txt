@@ -1,0 +1,7 @@
+
+
+// X.Y.Z -> SEMANTIC VERSIONING
+
+// X la MAJOR y es cuando se rompe la compatibilidad hacia atrás
+// Y la MINOR y es cuando se añaden nuevas funcionalidades
+// Z el PACTH y es cuando se arreglan bugs

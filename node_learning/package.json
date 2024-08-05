@@ -1,0 +1,19 @@
+{
+  "name": "course-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "course",
+    "node",
+    "nodejs"
+  ],
+  "author": "Guillermo Palacios - RacoonDevRock",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "picocolors": "1.0.1"
+  }
+}
