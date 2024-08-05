@@ -1,0 +1,30 @@
+### Recuperar todas las peliculas
+GET http://localhost:3000/movies
+
+### Recuperar pelicula por ID
+GET http://localhost:3000/movies/b6e03689-cccd-478e-8565-d92f40813b13
+
+### Recuperar todas las peliculas por un genero
+GET http://localhost:3000/movies?genre=drama
+
+### Crear una pelicula
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+    "title": "The Autralopitekus Homofobeous",
+    "year": 2019,
+    "director": "Flavio Cortex",
+    "duration": 210,
+    "poster": "https://i.pinimg.com/originals/7e/37/b9/7e37b994b613e94cba64f307b1983e39.jpg",
+    "genre": ["Sci-Fi", "Drama"]
+}
+
+### Actualizar una pelicula
+PATCH http://localhost:3000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+Content-Type: application/json
+
+{
+    "title": "Lluvia de hamburguesas",
+    "year": 1990
+}
