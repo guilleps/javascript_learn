@@ -2,7 +2,6 @@
 // ya que son archivos creados por uno mismo y no es una biblioteca externa caso contrario funcionaria
 // sin la extension
 import app from "./app.js";
-
 import { connectDB } from "./db/db.js";
 
 connectDB();
