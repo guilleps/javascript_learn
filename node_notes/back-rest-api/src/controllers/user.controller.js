@@ -47,4 +47,35 @@ export const register = async (req, res) => {
 
 // login
 
-export const login = async (req, res) => {};
+export const login = async (req, res) => {
+  const { email, password } = req.body; // binding
+
+  try {
+    const userFound = await User.findOne({ email }); // guardamos en la variable el usuario que coincida con el email en la BD
+
+    if (!userFound) {
+      return res.status(400).json(["User not found"]); // validamos
+    }
+
+    const isMatch = await bcrypt.compare(password, userFound.password); // verificamos el password del request con el password de la BD
+
+    if (!isMatch) {
+      return res.status(400).json(["Incorrect password"]); // validamos
+    }
+
+    // usamos el token
+    const token = await createAccessToken({ id: userFound._id }); // enviamos el id del user para crear un token
+
+    res.cookie("token", token); // se crea una cookie(de express), y se ancla directamente al navegador
+
+    // response
+    res.json({
+      email: userFound.email,
+      username: userFound.username,
+      id: userFound.id,
+      createdAt: userFound.createdAt,
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
