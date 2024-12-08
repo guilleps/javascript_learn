@@ -36,3 +36,12 @@ export const saveReceta = async (receta) => {
 
   return { ...receta };
 };
+
+
+export const buscarRecetasPorCategoria = async (categoria) => {
+    const [rows] = await db.query(
+      "SELECT id_receta, titulo, descripcion, imagen FROM receta WHERE categoria = ?",
+      [categoria]
+    );
+    return rows;
+  };

@@ -2,10 +2,11 @@
 // NO CARGA EL APP.JS Y HAY MEJOR MODULARIDAD (ESCALABILIDAD)
 
 import express from "express";
-import { verPerfil } from "../controller/creadorController.js";
+import { cantidadDeRecetasCreadas, verPerfil } from "../controller/creadorController.js";
 
 const creadRouter = express.Router();
 
 creadRouter.get("/perfil", verPerfil);
+creadRouter.get("/cantidadRecetas", cantidadDeRecetasCreadas);
 
 export default creadRouter;

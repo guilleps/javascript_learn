@@ -1,5 +1,8 @@
 import { validateCategoria } from "../model/Categoria.js";
-import { saveReceta } from "../repository/recetaRepository.js";
+import {
+  buscarRecetasPorCategoria,
+  saveReceta,
+} from "../repository/recetaRepository.js";
 
 export const crearRecetaService = async (data) => {
   try {
@@ -21,3 +24,17 @@ export const crearRecetaService = async (data) => {
     throw new Error("No se pudo guardar la receta");
   }
 };
+
+export async function recetasDeCategoria(categoria) {
+  const recetas = await buscarRecetasPorCategoria(categoria);
+  if (!recetas)
+    throw new Error(
+      "Error al obtener todas las recetas de la categoria ",
+      categoria
+    );
+  return recetas;
+}
+
+export async function buscarDetalleRecetaPorId(recetaId) {
+    
+}

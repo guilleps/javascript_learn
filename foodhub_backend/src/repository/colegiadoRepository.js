@@ -20,10 +20,15 @@ export const confirmColegiado = async (codigo) => {
   return colegiado;
 };
 
-export const findColegiadoByCodigoColegiado = async (codigo) => {
+export const findColegiadoByNombreApellidosCodigo = async (nombre, apellidoPaterno, apellidoMaterno, codigo) => {
   const [rows] = await db.query(
-    "SELECT * FROM colegiado WHERE codigo_colegiado = ? AND cuenta_confirmada = false",
-    [codigo]
+    `SELECT * FROM colegiado 
+     WHERE codigo_colegiado = ? 
+       AND nombre_colegiado = ? 
+       AND apellido_paterno_colegiado = ? 
+       AND apellido_materno_colegiado = ? 
+       AND cuenta_confirmada = false`,
+    [codigo, nombre, apellidoPaterno, apellidoMaterno]
   );
   return rows[0];
 };

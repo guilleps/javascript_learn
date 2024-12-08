@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 
-export const createToken = async ({ correo, role }) => {
+export const createToken = ({ correo, role }) => {
   return jwt.sign(
     {
       iss: "FoodHB-ATUHBACK",

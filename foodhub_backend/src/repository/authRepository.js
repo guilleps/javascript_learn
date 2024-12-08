@@ -1,5 +1,7 @@
 // LOGICA CON LA ENTIDAD CREADOR
 import db from "../config/db.js";
+import schedule from "node-schedule";
+import { NotFoundError } from "../excepcion/customErrors.js";
 
 export const registerCreador = async (data) => {
   const [result] = await db.query(
@@ -34,18 +36,26 @@ export const registerCreador = async (data) => {
   return { id_creador: result.insertId, token: data.token_confirmacion };
 };
 
-export const scheduleUserDeletion = (id_creador) => {
-  setTimeout(async () => {
-    const [rows] = await db.query(
-      "SELECT * FROM creador WHERE id_creador = ? AND is_enabled = false",
-      [id_creador]
-    );
+export const scheduleUserDeletion = (id_creador, creationTime) => {
+  const deletionTime = new Date(creationTime.getTime() + 15 * 60 * 1000);
 
-    if (rows.length > 0) {
-      await db.query("DELETE FROM creador WHERE id_creador = ?", [id_creador]);
-      console.log(`Usuario ${id_creador} no confirmó su cuenta, eliminado`);
+  schedule.scheduleJob(deletionTime, async () => {
+    try {
+      const [rows] = await db.query(
+        "SELECT * FROM creador WHERE id_creador = ? AND is_enabled = false",
+        [id_creador]
+      );
+
+      if (rows.length > 0) {
+        await db.query("DELETE FROM creador WHERE id_creador = ?", [
+          id_creador,
+        ]);
+        console.log(`Usuario ${id_creador} no confirmó su cuenta, eliminado`);
+      }
+    } catch (error) {
+      console.error(`Error al eliminar usuario ${id_creador}:`, error.message);
     }
-  }, 15 * 60 * 1000);
+  });
 };
 
 export const findByEmail = async (correo_electronico) => {
@@ -54,6 +64,24 @@ export const findByEmail = async (correo_electronico) => {
     [correo_electronico]
   );
   return rows[0];
+};
+
+export const findEnableUser = async (creadorId) => {
+  const [rows] = await db.query(
+    "SELECT is_enabled FROM creador WHERE id_creador = ?",
+    [creadorId]
+  );
+
+  if (rows.length === 0) {
+    throw new NotFoundError("Usuario no encontrado.");
+  }
+
+  const isEnabled = rows[0].is_enabled;
+  const isEnabledBoolean = Buffer.isBuffer(isEnabled)
+    ? isEnabled.readUInt8(0) === 1
+    : !!isEnabled;
+
+  return isEnabledBoolean;
 };
 
 export const findByTokenAndEnableUser = async (token) => {
