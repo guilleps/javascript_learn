@@ -1,3 +1,5 @@
+import { RoleEnum } from "./Role.js";
+
 // MAPEO DE LA CLASE CON LA BD
 class Creador {
   constructor({
@@ -9,7 +11,7 @@ class Creador {
     contrasenia,
     codigo_colegiatura,
     foto_perfil = null,
-    role = "USER",
+    role = RoleEnum.USER,
     account_non_expired = false,
     account_non_locked = false,
     credentials_non_expired = false,

@@ -1,14 +1,11 @@
+// DEFINE LAS RUTAS DE LA APLICACION - ENDPOINTS
+// NO CARGA EL APP.JS Y HAY MEJOR MODULARIDAD (ESCALABILIDAD)
+
 import express from "express";
-import {
-  confirmAccount,
-  createCreadorController,
-  loginCreadorController,
-} from "../controller/creadorController.js";
+import { verPerfil } from "../controller/creadorController.js";
 
-const router = express.Router();
+const creadRouter = express.Router();
 
-router.post("/registrar", createCreadorController);
-router.get("/confirmar", confirmAccount);
-router.post("/login", loginCreadorController);
+creadRouter.get("/perfil", verPerfil);
 
-export default router;
+export default creadRouter;

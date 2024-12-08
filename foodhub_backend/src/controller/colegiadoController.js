@@ -1,7 +1,7 @@
 // LOGICA DE NEGOCIO - OPERACIONES ESPECIFICAS LO QUE ACCEDE, PROCESA O DEVUELVA UNA RESPUESTA - REUTILIZACION
 import db from "../config/db.js";
 
-export const getAllColegiados = async (req, res) => {
+export async function getAllColegiados(req, res) {
   try {
     const [rows] = await db.query("SELECT * FROM colegiado");
 
@@ -15,4 +15,4 @@ export const getAllColegiados = async (req, res) => {
     console.error("Error no hay", error.message);
     res.status(500).json({ error: "Errorsote" });
   }
-};
+}

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { RoleEnum } from "../Role.js";
 
 export const CreadorSchema = {
   register: z.object({
@@ -12,7 +13,7 @@ export const CreadorSchema = {
       .max(20, "El apellido paterno debe tener máximo 20 caracteres."),
     apellido_materno: z
       .string()
-      .min(1, "El apellido materno es obligatorio.")
+      .min(1, "El apellido materno es obligatorio.")  
       .max(20, "El apellido materno debe tener máximo 20 caracteres."),
     correo_electronico: z
       .string()
@@ -36,7 +37,7 @@ export const CreadorSchema = {
     account_non_expired: z.boolean().default(false),
     account_non_locked: z.boolean().default(false),
     credentials_non_expired: z.boolean().default(false),
-    role: z.string().default("USER"),
+    role: z.nativeEnum(RoleEnum).default(RoleEnum.USER),
   }),
   login: z.object({
     correo_electronico: z
