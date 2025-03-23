@@ -9,7 +9,7 @@ import recetaRouter from "./src/routes/recetaRoutes.js";
 import { errorHandler } from "./src/middleware/errorMiddleware.js";
 
 const app = express();
-const port = 8080;
+const port = 3000;
 const corsOptions = {
   origin: "*",
   optionSuccessStatus: 200,
