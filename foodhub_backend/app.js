@@ -35,3 +35,16 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`);
 });
+
+
+/* Express también permite enviar archivos como respuesta utilizando res.sendFile(). */
+import { fileURLToPath } from "url";
+import path from "path";
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+app.get("/file", (req, res) => {
+  const filePath = path.join(__dirname, "READme.md");
+  res.sendFile(filePath);
+});

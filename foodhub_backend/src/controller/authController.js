@@ -69,7 +69,7 @@ export async function confirmAccount(req, res, next) {
     await confirmAccountService(token);
 
     res.status(200).json({ message: "Cuenta confirmada exitosamente." });
-  } catch (error) {
+  } catch (error) { 
     if (error.message.includes("Usuario no encontrado") || error.message.includes("Código de colegiado no encontrado")) {
       return next(new NotFoundError(error.message));
     }

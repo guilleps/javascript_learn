@@ -4,9 +4,9 @@
 const reqMiddleware = (req, res, next) => {
   // Registrar la solicitud inicial
   console.log(
-    `Time: ${new Date().toISOString()} | Method: ${req.method}, | Endpoint: ${
-      req.originalUrl
-    }`
+    `[${new Date().toLocaleDateString("es-ES")} ${new Date().toLocaleTimeString(
+      "es-ES"
+    )}] | Method: ${req.method} | Endpoint: ${req.originalUrl}`
   );
 
   // Escuchar el evento `finish` para capturar el código de estado al final de la respuesta
